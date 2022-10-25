@@ -8,52 +8,54 @@ if (!empty($_POST)){
     $errors = '';
     if (!empty($_POST['hp_name'])){
         //the honey pot field should always be empty, if a bot has filled it in, we know it is spam
-        throw new \Exception("An unknown error has occurred");
-    }
-    if (empty($_POST['name'])){
-        if (!empty($errors)){
-            $errors .= "<br>\n";
+        //throw new \Exception("An unknown error has occurred");
+        //fail nicely
+        $errors = 'An unknown error has occurred.';
+    }else {
+        if (empty($_POST['name'])) {
+            if (!empty($errors)) {
+                $errors .= "<br>\n";
+            }
+            $errors .= "Name is empty";
+        } else {
+            $companyname = htmlentities($_POST['name']);
         }
-        $errors .= "Name is empty";
-    }else{
-        $companyname = htmlentities($_POST['name']);
-    }
-    if (empty($_POST['street1'])){
-        if (!empty($errors)){
-            $errors .= "<br>\n";
+        if (empty($_POST['street1'])) {
+            if (!empty($errors)) {
+                $errors .= "<br>\n";
+            }
+            $errors .= "Street 1 is empty";
+        } else {
+            $companystreet1 = htmlentities($_POST['street1']);
         }
-        $errors .= "Street 1 is empty";
-    }else{
-        $companystreet1 = htmlentities($_POST['street1']);
-    }
-    if (isset($_POST['street2'])){
-        $companystreet2 = htmlentities($_POST['street2']);
-    }
-    if (empty($_POST['city'])){
-        if (!empty($errors)){
-            $errors .= "<br>\n";
+        if (isset($_POST['street2'])) {
+            $companystreet2 = htmlentities($_POST['street2']);
         }
-        $errors .= "City is empty";
-    }else{
-        $companycity = htmlentities($_POST['city']);
-    }
-    if (empty($_POST['state_province'])){
-        if (!empty($errors)){
-            $errors .= "<br>\n";
+        if (empty($_POST['city'])) {
+            if (!empty($errors)) {
+                $errors .= "<br>\n";
+            }
+            $errors .= "City is empty";
+        } else {
+            $companycity = htmlentities($_POST['city']);
         }
-        $errors .= "State/Province is empty";
-    }else{
-        $companystate_province = htmlentities($_POST['state_province']);
-    }
-    if (empty($_POST['zip'])){
-        if (!empty($errors)){
-            $errors .= "<br>\n";
+        if (empty($_POST['state_province'])) {
+            if (!empty($errors)) {
+                $errors .= "<br>\n";
+            }
+            $errors .= "State/Province is empty";
+        } else {
+            $companystate_province = htmlentities($_POST['state_province']);
         }
-        $errors .= "Postal Code/Zip is empty";
-    }else{
-        $companyzip = htmlentities($_POST['zip']);
+        if (empty($_POST['zip'])) {
+            if (!empty($errors)) {
+                $errors .= "<br>\n";
+            }
+            $errors .= "Postal Code/Zip is empty";
+        } else {
+            $companyzip = htmlentities($_POST['zip']);
+        }
     }
-
     if (!empty($errors)){
         $tpl->setError("There are errors with your submission: <br>\n".$errors);
     }else{
