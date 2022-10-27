@@ -227,4 +227,4 @@ $tpl->header($title);
     });
 </script>
 <?php
-$tpl->footer();;
+$tpl->footer();
