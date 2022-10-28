@@ -11,4 +11,4 @@ $tpl->header($title);
 List of Employees
 <?php
 echo array2table($emp->getAll());
-$tpl->footer();;
+$tpl->footer();
