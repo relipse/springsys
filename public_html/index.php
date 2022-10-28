@@ -7,4 +7,4 @@ $title = 'Home';
 $tpl->header($title, false);
 ?>
 <?php
-$tpl->footer();;
+$tpl->footer();
