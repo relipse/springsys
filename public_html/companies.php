@@ -16,4 +16,4 @@ $companies = $comp->getAll();
 
 echo array2table($companies);
 
-$tpl->footer();;
+$tpl->footer();
