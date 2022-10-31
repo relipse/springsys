@@ -62,42 +62,49 @@ if (!empty($_POST)){
         if (empty($_POST['employee_first'])){
             $tpl->setError("You need at least 1 employee in the company");
         }else{
-            $newcompanyid = $comp->add($_POST['name'], $_POST['street1'], $_POST['street2'],
-                $_POST['city'], $_POST['state_province'], $_POST['zip']);
-            if ($newcompanyid === -1){
-                $tpl->setError('There was an error adding the company.');
-            }else{
-                $validtries = 0;
-                $failcount = 0;
-                $successcount = 0;
-                foreach($_POST['employee_first'] as $i => $firstname){
-                    if ($i === 0){
-                        //ignore 0th element because that is the template
-                        continue;
+            try {
+                $newcompanyid = $comp->add($_POST['name'], $_POST['street1'], $_POST['street2'],
+                    $_POST['city'], $_POST['state_province'], $_POST['zip']);
+
+                if ($newcompanyid === -1){
+                    $tpl->setError('There was an error adding the company.');
+                }else{
+                    $validtries = 0;
+                    $failcount = 0;
+                    $successcount = 0;
+                    foreach($_POST['employee_first'] as $i => $firstname){
+                        if ($i === 0){
+                            //ignore 0th element because that is the template
+                            continue;
+                        }
+                        if (!isset($_POST['employee_middle'][$i])){
+                            continue;
+                            //throw new \Exception("Middle name not sent");
+                        }
+                        if (!isset($_POST['employee_last'][$i])){
+                            continue;
+                            //throw new \Exception("Last name not sent");
+                        }
+                        $validtries++;
+                        //if we got here, a full employee name exists in post
+                        $addedempid = $comp->addEmployee($newcompanyid, $firstname, $_POST['employee_middle'][$i], $_POST['employee_last'][$i]);
+                        if ($addedempid === -1){
+                            $failcount++;
+                        }else{
+                            $successcount++;
+                        }
                     }
-                    if (!isset($_POST['employee_middle'][$i])){
-                        continue;
-                        //throw new \Exception("Middle name not sent");
+                    if ($successcount > 0){
+                        $tpl->setSuccess("You have saved a company with ".$successcount.' employee(s).');
                     }
-                    if (!isset($_POST['employee_last'][$i])){
-                        continue;
-                        //throw new \Exception("Last name not sent");
-                    }
-                    $validtries++;
-                    //if we got here, a full employee name exists in post
-                    $addedempid = $comp->addEmployee($newcompanyid, $firstname, $_POST['employee_middle'][$i], $_POST['employee_last'][$i]);
-                    if ($addedempid === -1){
-                        $failcount++;
-                    }else{
-                        $successcount++;
+                    if ($failcount){
+                        $tpl->setError('There were '.$failcount.' employee(s) that could not be added.');
                     }
                 }
-                if ($successcount > 0){
-                    $tpl->setSuccess("You have saved a company with ".$successcount.' employee(s).');
-                }
-                if ($failcount){
-                    $tpl->setError('There were '.$failcount.' employee(s) that could not be added.');
-                }
+
+            }catch(Throwable $e){
+                $newcompanyid = -1;
+                $tpl->setError($e->getMessage());
             }
 
         }

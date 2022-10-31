@@ -23,6 +23,13 @@ class Company {
      * @return int
      */
     public function add(string $name, string $street1, string $street2, string $city, string $state_province, string $zip) : int{
+        $params = func_get_args();
+        foreach($params as $param){
+            if ($this->hasURL($param)){
+                //may not contain urls
+                throw new \Exception('You may not submit URLS');
+            }
+        }
         $sql = <<<EOD
 INSERT INTO companies (name, street1, street2, city, state_province, zip) 
                 VALUES(:name, :street1, :street2, :city, :state_province, :zip)
@@ -63,6 +70,16 @@ EOD;
         return $row;
     }
 
+
+    /**
+     * Does this string contain a URL (we don't want spammers putting URLs in our database)
+     * @param string $string
+     * @return bool
+     */
+    public function hasURL(string $string): bool{
+        return strpos($string, '://') !== false;
+    }
+
     /**
      * Add employee to company
      * @param int $companyid
@@ -72,6 +89,13 @@ EOD;
      * @return int
      */
     public function addEmployee(int $companyid, string $firstname, string $middle, string $lastname): int{
+        $params = func_get_args();
+        foreach($params as $param){
+            if ($this->hasURL($param)){
+                //may not contain urls
+                throw new \Exception('You may not submit URLS');
+            }
+        }
         $sql = <<<EOD
 INSERT INTO employees(company_id, firstname, middlename, lastname)
 VALUES(:companyid, :firstname, :middlename, :lastname);
