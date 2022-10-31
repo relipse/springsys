@@ -1,4 +1,14 @@
 <?php
+/**
+ * Template
+ * - Load database with Config instance
+ * - insert
+ * - fetching
+ *
+ * Code Challenge
+ * @author Jim A Kinsman <relipse@gmail.com>
+ * @copyright 2022 Jim A Kinsman
+ */
 namespace SpringSys;
 
 class Template{

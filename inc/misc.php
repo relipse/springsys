@@ -1,7 +1,13 @@
 <?php
+/**
+ * Miscellaneous functions
+ *
+ * Code Challenge
+ * @author Jim A Kinsman <relipse@gmail.com>
+ * @copyright 2022 Jim A Kinsman
+ */
 
 //Using this nice open source function that I found useful
-
 /**
  * Translate a result array into a HTML table
  *

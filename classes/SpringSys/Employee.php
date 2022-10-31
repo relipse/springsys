@@ -1,7 +1,16 @@
 <?php
- namespace SpringSys;
+/**
+ * Employee (Employees)
+ * - fetch all (with company)
+ *
+ * Code Challenge
+ * @author Jim A Kinsman <relipse@gmail.com>
+ * @copyright 2022 Jim A Kinsman
+ */
 
- class Employee {
+namespace SpringSys;
+
+class Employee {
      protected Db $db;
 
      /**
@@ -22,4 +31,4 @@ SELECT e.firstname, e.middlename, e.lastname, c.name AS company FROM employees e
 EOD;
          return $this->db->fetchAll($sql);
      }
- }
+}

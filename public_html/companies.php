@@ -1,4 +1,12 @@
 <?php
+/**
+ * Companies page
+ *  - show all companies with the number of employees
+ *
+ * Code Challenge
+ * @author Jim A Kinsman <relipse@gmail.com>
+ * @copyright 2022 Jim A Kinsman
+ */
 require_once(__DIR__.'/../inc/autoloader.inc.php');
 
 $cfg = new \SpringSys\Config();

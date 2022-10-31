@@ -1,4 +1,16 @@
 <?php
+/**
+ * Company (Companies)
+ * - add
+ * - get
+ * - fetch all
+ * - add employee to company
+ *
+ * Code Challenge
+ * @author Jim A Kinsman <relipse@gmail.com>
+ * @copyright 2022 Jim A Kinsman
+ */
+
 namespace SpringSys;
 
 class Company {

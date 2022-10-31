@@ -1,4 +1,14 @@
 <?php
+/**
+ * Config
+ *  - given a config file (with $cfg[] defined)
+ *  - load config
+ *  - get a config value
+ *
+ * Code Challenge
+ * @author Jim A Kinsman <relipse@gmail.com>
+ * @copyright 2022 Jim A Kinsman
+ */
 
 namespace SpringSys;
 

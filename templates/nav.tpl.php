@@ -1,3 +1,13 @@
+<?php
+/**
+ * Navbar template
+ * @see header.tpl.php
+ *
+ * Code Challenge
+ * @author Jim A Kinsman <relipse@gmail.com>
+ * @copyright 2022 Jim A Kinsman
+ */
+?>
 <nav>
     <ol>
         <li><a href="<?=$baseurl?>">Home</a></li>

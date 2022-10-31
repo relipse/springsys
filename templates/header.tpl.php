@@ -1,8 +1,17 @@
 <?php
-    $title = $title ?? '';
-    $fulltitle = $fulltitle ?? $title . ' - '.$this->cfg->get('sitename');
-    $baseurl = $baseurl ?? $this->cfg->get('baseurl');
-    $show_h1 = $show_h1 ?? true;
+/**
+ * Header template
+ * @see footer.tpl.php
+ *
+ * Code Challenge
+ * @author Jim A Kinsman <relipse@gmail.com>
+ * @copyright 2022 Jim A Kinsman
+ */
+//variables used in this template
+$title = $title ?? '';
+$fulltitle = $fulltitle ?? $title . ' - '.$this->cfg->get('sitename');
+$baseurl = $baseurl ?? $this->cfg->get('baseurl');
+$show_h1 = $show_h1 ?? true;
 ?>
 <!doctype HTML>
 <html lang="en">
