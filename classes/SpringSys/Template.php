@@ -7,6 +7,12 @@ class Template{
     protected string $success_msg = '';
 
     public Config $cfg;
+
+    /**
+     * Constructor
+     * @param Config $cfg
+     * @throws \Exception
+     */
     public function __construct(Config $cfg = new \SpringSys\Config()){
         $tpl_dir = $cfg->get('template_dir');
         if (!file_exists($tpl_dir)){
@@ -63,11 +69,21 @@ class Template{
         $this->load('footer');
     }
 
-    public function setError(string $msg){
+    /**
+     * Set Error Message
+     * @param string $msg
+     * @return void
+     */
+    public function setError(string $msg): void{
         $this->error_msg = $msg;
     }
 
-    public function setSuccess(string $msg){
+    /**
+     * Set success message to display in template
+     * @param string $msg
+     * @return void
+     */
+    public function setSuccess(string $msg): void{
         $this->success_msg = $msg;
     }
 }
