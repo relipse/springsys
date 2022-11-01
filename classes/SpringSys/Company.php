@@ -58,12 +58,31 @@ EOD;
     }
 
     /**
+     * Delete company (and all employees) with
+     * given id
+     * @param int $id
+     * @return bool
+     */
+    public function remove(int $id): bool{
+        $sql = <<<EOD
+DELETE FROM companies WHERE id = :company_id;
+EOD;
+        $sql2 = <<<EOD
+DELETE FROM employees WHERE company_id = :company_id;
+EOD;
+
+        $res1 = $this->db->execute($sql, ['company_id'=>$id]);
+        $res2 = $this->db->execute($sql2, ['company_id'=> $id]);
+        return $res1 && $res2;
+    }
+
+    /**
      * Get all companies and num employees
      * @return array|false
      */
     public function getAll(): array|false{
         $sql = <<<EOD
-SELECT c.name, street1, street2, city, state_province, zip, COUNT(e.id) AS num_employees from companies c LEFT join employees e ON e.company_id = c.id GROUP BY c.id; 
+SELECT c.id, c.name, street1, street2, city, state_province, zip, COUNT(e.id) AS num_employees from companies c LEFT join employees e ON e.company_id = c.id GROUP BY c.id; 
 EOD;
         return $this->db->fetchAll($sql);
     }
@@ -80,6 +99,24 @@ EOD;
         $params = ['id'=>$company_id];
         $row = $this->db->fetchFirst($sql, $params);
         return $row;
+    }
+
+    /**
+     * Count the number of employees in this company
+     * @param int $company_id
+     * @return int
+     */
+    public function countEmployees(int $company_id) : int {
+        $sql = <<<EOD
+SELECT COUNT(id) AS num_employees FROM employees WHERE employees.company_id = :company_id
+EOD;
+        $params = ['company_id'=>$company_id];
+        $row = $this->db->fetchFirst($sql, $params);
+        if ($row){
+            return $row['num_employees'];
+        }else{
+            return -1;
+        }
     }
 
 
