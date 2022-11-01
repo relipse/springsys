@@ -1,9 +1,6 @@
 <?php
 /**
  * Template
- * - Load database with Config instance
- * - insert
- * - fetching
  *
  * Code Challenge
  * @author Jim A Kinsman <relipse@gmail.com>
