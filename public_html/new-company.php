@@ -239,6 +239,7 @@ $tpl->header($title);
 
     $(document).on("click", "a.rem_employee", function(){
         $(this).closest('.employee').remove();
+        return false;
     });
 </script>
 <?php
